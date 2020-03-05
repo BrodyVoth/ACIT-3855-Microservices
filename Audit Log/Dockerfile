@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-MAINTAINER Brody Voth "bvoth1@my.bcit.ca
+MAINTAINER Brody Voth "bvoth1@my.bcit.ca"
 
 RUN apt-get update -y && \
     apt-get install -y python3-pip python3-dev
