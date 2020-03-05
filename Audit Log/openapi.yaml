@@ -1,0 +1,91 @@
+swagger: '2.0'
+info:
+  description: Audit service for sleep/day stats
+  version: 1.0.0
+  title: Sleep Audit Service
+
+paths:
+  /log/sleep_stats:
+    get:
+      summary: get sleep stats by offset
+      operationId: app.sleep_stat_offset
+      description: Gets offset of sleep stat
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: offset
+        description: pass an value offset to return
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Reports found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SleepStats'
+        400:
+          description: bad input parameters  
+  /log/day_stats:
+    get:
+      summary: get oldest day stat
+      operationId: app.get_oldest_day_stat
+      description: Gets oldest day stat
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Reports found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DayStats'
+        400:
+          description: bad input parameters  
+
+definitions:
+  SleepStats:
+    type: object
+    required:
+    - user_id
+    - sleep_start_time
+    - sleep_end_time
+    - feeling
+    - notes
+    properties:
+      user_id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      sleep_start_time:
+        type: string
+        format: date-time
+        example: 2016-08-29T09:12:33.001Z
+      sleep_end_time:
+        type: string
+        format: date-time
+        example: 2016-08-29T16:18:52.001Z
+      feeling:
+        type: string
+        example: "Good"
+      notes:
+        type: string
+        example: "didn't wake up during night"
+  DayStats:
+    type: object
+    required:
+    - user_id
+    - mood
+    - notes
+    properties:
+      user_id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      mood:
+        type: string
+        example: "Poor"
+      notes:
+        type: string
+        example: "napped 2 hours"

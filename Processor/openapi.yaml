@@ -1,0 +1,41 @@
+swagger: '2.0'
+info:
+  description: Track users' sleep and feelings
+  version: 1.0.0
+  title: Sleep Health Statistics
+
+paths:
+  /report/stats:
+    get:
+      summary: gets statistics
+      operationId: app.get_statistics
+      description: Gets statistics
+      produces:
+      - application/json
+      responses:
+        200:
+          description: current stats
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Statistics'
+        400:
+          description: bad input parameters  
+definitions:
+  Statistics:
+    type: object
+    required:
+    - num_sleep_stats
+    - num_day_stats
+    - updated_timestamp
+    properties:
+      num_sleep_stats:
+        type: integer
+        example: 100
+      num_day_stats:
+        type: integer
+        example: 100
+      updated_timestamp:
+        type: string
+        format: date-time
+        example: 2016-08-29T16:18:52.001Z

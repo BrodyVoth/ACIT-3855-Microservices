@@ -1,0 +1,91 @@
+swagger: '2.0'
+info:
+  description: Track users' sleep and feelings
+  version: 1.0.0
+  title: Sleep Health Analyzer
+
+paths:
+  /report/sleep_stats:
+    post:
+      summary: reports sleep length and personal feeling in morning
+      operationId: app.report_sleep_stats
+      description: Stores a night's sleep stats
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: sleepStats
+        description: Sleep Stats
+        schema:
+          $ref: '#/definitions/SleepStats'
+      responses:
+        201:
+          description: item added
+        400:
+          description: invalid input, object invalid
+  /report/day_stats:
+    post:
+      summary: reports day's mood before bed
+      operationId: app.report_day_stats
+      description: Stores a user's feelings about the day
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: dayStats
+        description: Day Stats
+        schema:
+          $ref: '#/definitions/DayStats'
+      responses:
+        201:
+          description: item added
+        400:
+          description: invalid input, object invalid
+
+definitions:
+  SleepStats:
+    type: object
+    required:
+    - user_id
+    - sleep_start_time
+    - sleep_end_time
+    - feeling
+    - notes
+    properties:
+      user_id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      sleep_start_time:
+        type: string
+        format: date-time
+        example: 2016-08-29T09:12:33.001Z
+      sleep_end_time:
+        type: string
+        format: date-time
+        example: 2016-08-29T16:18:52.001Z
+      feeling:
+        type: string
+        example: "Good"
+      notes:
+        type: string
+        example: "didn't wake up during night"
+  DayStats:
+    type: object
+    required:
+    - user_id
+    - mood
+    - notes
+    properties:
+      user_id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      mood:
+        type: string
+        example: "Poor"
+      notes:
+        type: string
+        example: "napped 2 hours"
