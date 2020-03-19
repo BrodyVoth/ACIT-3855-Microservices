@@ -76,4 +76,5 @@ services:
       - 'kafka'
     volumes:
       - ./configs/audit-log:/config
-
+volumes:
+  my-db:
