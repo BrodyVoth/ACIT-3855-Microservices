@@ -16,9 +16,14 @@ import logging
 import logging.config
 from flask_cors import CORS, cross_origin
 
-with open('app_conf.yml', 'r') as f:
-    app_config = yaml.safe_load(f.read())
-    db = app_config['datastore']
+try:
+    with open('/config/app_conf.yaml', 'r') as f:
+        app_config = yaml.safe_load(f.read())
+        db = app_config['datastore']
+except IOError:
+    with open('app_conf.yml', 'r') as f:
+        app_config = yaml.safe_load(f.read())
+        db = app_config['datastore']
 
 with open('log_conf.yml', 'r') as f:
     log_config = yaml.safe_load(f.read())
