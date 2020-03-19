@@ -4,4 +4,4 @@ datastore:
 scheduler:
   period_sec: 5
 eventstore:
-  url: http://localhost:8090
+  url: http://ec2-34-220-130-154.us-west-2.compute.amazonaws.com:8090

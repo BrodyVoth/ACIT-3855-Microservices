@@ -1,5 +1,5 @@
 version: 1
 kafka:
-  server: localhost
+  server: ec2-34-220-130-154.us-west-2.compute.amazonaws.com
   port: 9092
 topic: events
